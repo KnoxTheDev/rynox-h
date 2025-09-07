@@ -21,6 +21,8 @@ jobs:
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3 # Use the setup-gradle action
+        with:
+          gradle-version: '8.9'
       - name: Build with Gradle
         run: gradle wrapper --gradle-version=8.3 && chmod +rwx ./gradlew && ./gradlew build
 
