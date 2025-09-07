@@ -19,14 +19,10 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      # Configure Gradle and specify version
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@latest
-        with:
-          gradle-version: '8.14.2'
-
+        uses: gradle/actions/setup-gradle@v3 # Use the setup-gradle action
       - name: Build with Gradle
-        run: gradle build
+        run: gradle build # Execute Gradle build using the Wrapper
 
   dependency-submission:
     runs-on: ubuntu-latest
