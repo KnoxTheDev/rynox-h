@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "rynox",
+  "version": "${version}",
+  "name": "Rynox",
+  "description": "A ghost client for Minecraft.",
+  "authors": [
+    "Knoxy"
+  ],
+  "contact": {
+    "homepage": "",
+    "sources": ""
+  },
+  "license": "MIT",
+  "icon": "assets/rynox/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "main": [
+      {
+        "adapter": "default",
+        "value": "dev.knoxy.rynox.client.Rynox"
+      }
+    ]
+  },
+  "mixins": [
+    "rynox.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.17.2",
+    "fabric": "*",
+    "minecraft": "~1.21.8"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}
