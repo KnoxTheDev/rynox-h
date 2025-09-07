@@ -11,7 +11,7 @@
     "homepage": "",
     "sources": ""
   },
-  "license": "MIT",
+  "license": "All Rights Reserved",
   "icon": "assets/rynox/icon.png",
   "environment": "client",
   "entrypoints": {
@@ -28,9 +28,6 @@
   "depends": {
     "fabricloader": ">=0.17.2",
     "fabric": "*",
-    "minecraft": "~1.21.8"
-  },
-  "suggests": {
-    "another-mod": "*"
+    "minecraft": "*"
   }
 }
