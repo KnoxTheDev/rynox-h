@@ -1,7 +1,7 @@
 package dev.knoxy.rynox.api.mixin;
 
 import com.mojang.authlib.GameProfile;
-import dev.knoxy.rynox.client.Prestige;
+import dev.knoxy.rynox.client.Rynox;
 import dev.knoxy.rynox.client.event.Phase;
 import dev.knoxy.rynox.client.event.impl.KnockbackEvent;
 import dev.knoxy.rynox.client.event.impl.MoveEvent;
@@ -27,7 +27,7 @@ extends AbstractClientPlayerEntity {
 
     @Inject(at={@At(value="HEAD")}, method={"swingHand"}, cancellable=true)
     void swingHand(Hand hand, CallbackInfo callbackInfo) {
-        if (Prestige.Companion.getSelfDestructed()) {
+        if (Rynox.Companion.getSelfDestructed()) {
             return;
         }
         if (new SwingHandEvent().invoke()) {
@@ -37,7 +37,7 @@ extends AbstractClientPlayerEntity {
 
     @Inject(at={@At(value="RETURN")}, method={"sendMovementPackets"})
     void sendMovementPacketsPost(CallbackInfo callbackInfo) {
-        if (Prestige.Companion.getSelfDestructed()) {
+        if (Rynox.Companion.getSelfDestructed()) {
             return;
         }
         if (new MoveEvent(Phase.POST, y, p).invoke()) {
@@ -54,7 +54,7 @@ extends AbstractClientPlayerEntity {
     }
 
     public void setVelocityClient(double x, double y, double z) {
-        if (Prestige.Companion.getSelfDestructed()) {
+        if (Rynox.Companion.getSelfDestructed()) {
             super.setVelocityClient(x, y, z);
             return;
         }
@@ -65,7 +65,7 @@ extends AbstractClientPlayerEntity {
 
     @Inject(at={@At(value="HEAD")}, method={"sendMovementPackets"})
     void sendMovementPacketsPre(CallbackInfo callbackInfo) {
-        if (Prestige.Companion.getSelfDestructed()) {
+        if (Rynox.Companion.getSelfDestructed()) {
             return;
         }
         y = getYaw();

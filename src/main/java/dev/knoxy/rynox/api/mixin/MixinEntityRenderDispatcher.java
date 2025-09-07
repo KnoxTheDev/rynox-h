@@ -1,6 +1,6 @@
 package dev.knoxy.rynox.api.mixin;
 
-import dev.knoxy.rynox.client.Prestige;
+import dev.knoxy.rynox.client.Rynox;
 import dev.knoxy.rynox.client.event.impl.RenderHitboxEvent;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class MixinEntityRenderDispatcher {
     @Inject(method={"renderHitbox"}, at={@At(value="RETURN")})
     private static void renderHitboxReturn(MatrixStack matrixStack, VertexConsumer vertexConsumer, Entity entity, float f, CallbackInfo callbackInfo) {
-        if (Prestige.Companion.getSelfDestructed()) {
+        if (Rynox.Companion.getSelfDestructed()) {
             return;
         }
         new RenderHitboxEvent(null).invoke();
@@ -23,7 +23,7 @@ public class MixinEntityRenderDispatcher {
 
     @Inject(method={"renderHitbox"}, at={@At(value="HEAD")})
     private static void renderHitbox(MatrixStack matrixStack, VertexConsumer vertexConsumer, Entity entity, float f, CallbackInfo callbackInfo) {
-        if (Prestige.Companion.getSelfDestructed()) {
+        if (Rynox.Companion.getSelfDestructed()) {
             return;
         }
         new RenderHitboxEvent(entity).invoke();

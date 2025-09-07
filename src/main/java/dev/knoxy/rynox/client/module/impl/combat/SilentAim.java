@@ -1,7 +1,7 @@
 package dev.knoxy.rynox.client.module.impl.combat;
 
 import dev.knoxy.rynox.api.interfaces.IRotatable;
-import dev.knoxy.rynox.client.Prestige;
+import dev.knoxy.rynox.client.Rynox;
 import dev.knoxy.rynox.client.event.EventListener;
 import dev.knoxy.rynox.client.event.impl.SwingHandEvent;
 import dev.knoxy.rynox.client.module.Category;
@@ -12,7 +12,7 @@ import dev.knoxy.rynox.client.util.impl.Rotation;
 import dev.knoxy.rynox.client.util.impl.RotationUtil;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.AxeItem;
-import net.minecraft.item.SwordItem;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.HitResult;
 
@@ -29,12 +29,12 @@ public class SilentAim extends Module implements IRotatable {
 
     @Override
     public void onEnable() {
-        Prestige.Companion.getRotationManager().addRotation(this);
+        Rynox.Companion.getRotationManager().addRotation(this);
     }
 
     @Override
     public void onDisable() {
-        Prestige.Companion.getRotationManager().removeRotation(this);
+        Rynox.Companion.getRotationManager().removeRotation(this);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class SilentAim extends Module implements IRotatable {
         if (!preClick) {
             return null;
         }
-        if (weaponOnly.getObject() && !(getMc().player.getMainHandStack().getItem() instanceof SwordItem) && !(getMc().player.getMainHandStack().getItem() instanceof AxeItem)) {
+        if (weaponOnly.getObject() && !(getMc().player.getMainHandStack().isIn(ItemTags.SWORDS)) && !(getMc().player.getMainHandStack().getItem() instanceof AxeItem)) {
             return null;
         }
         HitResult hitResult = getMc().crosshairTarget;
@@ -64,7 +64,7 @@ public class SilentAim extends Module implements IRotatable {
     @EventListener
     public void event(SwingHandEvent event) {
         if (!postClick) {
-            if (weaponOnly.getObject() && !(getMc().player.getMainHandStack().getItem() instanceof SwordItem) && !(getMc().player.getMainHandStack().getItem() instanceof AxeItem)) {
+            if (weaponOnly.getObject() && !(getMc().player.getMainHandStack().isIn(ItemTags.SWORDS)) && !(getMc().player.getMainHandStack().getItem() instanceof AxeItem)) {
                 return;
             }
             HitResult hitResult = getMc().crosshairTarget;

@@ -6,7 +6,7 @@ import dev.knoxy.rynox.client.event.impl.SwingHandEvent;
 import dev.knoxy.rynox.client.module.Category;
 import dev.knoxy.rynox.client.module.Module;
 import net.minecraft.item.AxeItem;
-import net.minecraft.item.SwordItem;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.util.hit.HitResult;
 
 public class NoMissDelay extends Module {
@@ -18,7 +18,7 @@ public class NoMissDelay extends Module {
     @EventListener
     public void event(SwingHandEvent event) {
         if (getMc().crosshairTarget != null) {
-            if (getMc().player.getMainHandStack().getItem() instanceof SwordItem || getMc().player.getMainHandStack().getItem() instanceof AxeItem) {
+            if (getMc().player.getMainHandStack().isIn(ItemTags.SWORDS) || getMc().player.getMainHandStack().getItem() instanceof AxeItem) {
                 if (getMc().crosshairTarget.getType() == HitResult.Type.MISS) {
                     event.setCancelled();
                 }
@@ -29,7 +29,7 @@ public class NoMissDelay extends Module {
     @EventListener
     public void event(LastAttackedEvent event) {
         if (getMc().crosshairTarget != null) {
-            if (getMc().player.getMainHandStack().getItem() instanceof SwordItem || getMc().player.getMainHandStack().getItem() instanceof AxeItem) {
+            if (getMc().player.getMainHandStack().isIn(ItemTags.SWORDS) || getMc().player.getMainHandStack().getItem() instanceof AxeItem) {
                 if (getMc().crosshairTarget.getType() == HitResult.Type.MISS) {
                     event.setCancelled();
                 }

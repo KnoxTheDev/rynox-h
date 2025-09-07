@@ -1,6 +1,7 @@
 package dev.knoxy.rynox.client.util.impl;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.VertexFormat;
 import dev.knoxy.rynox.client.shader.impl.GradientGlowShader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
@@ -168,7 +169,7 @@ public class RenderUtil {
         renderRoundedRect(f, f2, f3, f4, f5, color, VertexFormat.DrawMode.DEBUG_LINE_STRIP);
     }
 
-    static void renderRoundedRect(float f, float f2, float f3, float f4, float f5, Color color, VertexFormat.DrawMode drawMode) {
+    static void renderRoundedRect(float f, float f2, float f3, float f4, float f5, Color color, com.mojang.blaze3d.vertex.VertexFormat.DrawMode drawMode) {
         MatrixStack matrixStack = RenderHelper.getMatrixStack();
         matrixStack.push();
         double d = Math.PI;
@@ -417,7 +418,7 @@ public class RenderUtil {
     }
 
     public static void renderRoundedRect(float f, float f2, float f3, float f4, Color color, float f5) {
-        renderRoundedRect(f, f2, f3, f4, f5, color, VertexFormat.DrawMode.TRIANGLE_FAN);
+        renderRoundedRect(f, f2, f3, f4, f5, color, com.mojang.blaze3d.vertex.VertexFormat.DrawMode.TRIANGLE_FAN);
     }
 
     public static void renderFilledBox(float f, float f2, float f3, float f4, float f5, float f6, Color color) {

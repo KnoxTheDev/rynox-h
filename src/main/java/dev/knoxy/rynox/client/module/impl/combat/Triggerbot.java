@@ -1,6 +1,6 @@
 package dev.knoxy.rynox.client.module.impl.combat;
 
-import dev.knoxy.rynox.client.Prestige;
+import dev.knoxy.rynox.client.Rynox;
 import dev.knoxy.rynox.client.event.EventListener;
 import dev.knoxy.rynox.client.event.Phase;
 import dev.knoxy.rynox.client.event.impl.EntityEvent;
@@ -25,8 +25,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
-import net.minecraft.item.SwordItem;
 import net.minecraft.network.packet.c2s.play.PlayerInteractBlockC2SPacket;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.Vec3d;
@@ -76,7 +76,7 @@ public class Triggerbot extends Module {
                     }
                 }
                 if (getMc().player != null) {
-                    if (getMc().player.getMainHandStack().getItem() instanceof SwordItem) {
+                    if (getMc().player.getMainHandStack().isIn(ItemTags.SWORDS)) {
                         if (getMc().player != null && getMc().player.getAttackCooldownProgress(0.5f) < cooldown.getObject().floatValue() / 100) {
                             return;
                         }
@@ -147,7 +147,7 @@ public class Triggerbot extends Module {
 
     boolean method602(Entity entity) {
         if (entity instanceof PlayerEntity) {
-            SocialsManager socialsManager = Prestige.Companion.getSocialsManager();
+            SocialsManager socialsManager = Rynox.Companion.getSocialsManager();
             String string = entity.getEntityName();
             if (socialsManager.isFriend(string)) return false;
         }
@@ -157,7 +157,7 @@ public class Triggerbot extends Module {
 
         if (entity == getMc().player) return false;
         if (entity instanceof PlayerEntity) {
-            if (!this.targetMode.getValue("Players") || !Prestige.Companion.getAntiBotManager().isNotBot(entity)) {
+            if (!this.targetMode.getValue("Players") || !Rynox.Companion.getAntiBotManager().isNotBot(entity)) {
                 return false;
             }
         }

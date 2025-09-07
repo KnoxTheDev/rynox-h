@@ -1,6 +1,6 @@
 package dev.knoxy.rynox.api.mixin;
 
-import dev.knoxy.rynox.client.Prestige;
+import dev.knoxy.rynox.client.Rynox;
 import dev.knoxy.rynox.client.event.Phase;
 import dev.knoxy.rynox.client.event.impl.EntityEvent;
 import net.minecraft.client.world.ClientWorld;
@@ -18,7 +18,7 @@ public abstract class MixinClientWorld {
 
     @Inject(method={"addEntityPrivate"}, at={@At(value="TAIL")})
     void onAddEntityPrivate(int id, Entity entity, CallbackInfo callbackInfo) {
-        if (Prestige.Companion.getSelfDestructed()) {
+        if (Rynox.Companion.getSelfDestructed()) {
             return;
         }
         if (entity != null) {
@@ -28,7 +28,7 @@ public abstract class MixinClientWorld {
 
     @Inject(method={"removeEntity"}, at={@At(value="HEAD")})
     void onRemoveEntity(int id, Entity.RemovalReason removalReason, CallbackInfo callbackInfo) {
-        if (Prestige.Companion.getSelfDestructed()) {
+        if (Rynox.Companion.getSelfDestructed()) {
             return;
         }
         Entity entity = getEntityById(id);

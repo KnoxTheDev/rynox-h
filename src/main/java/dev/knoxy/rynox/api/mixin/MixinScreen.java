@@ -1,6 +1,6 @@
 package dev.knoxy.rynox.api.mixin;
 
-import dev.knoxy.rynox.client.Prestige;
+import dev.knoxy.rynox.client.Rynox;
 import dev.knoxy.rynox.client.event.impl.BackgroundEvent;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class MixinScreen {
     @Inject(method={"renderBackgroundTexture"}, at={@At(value="HEAD")}, cancellable=true)
     void renderBackgroundTexture(DrawContext drawContext, CallbackInfo callbackInfo) {
-        if (Prestige.Companion.getSelfDestructed()) {
+        if (Rynox.Companion.getSelfDestructed()) {
             return;
         }
         if (new BackgroundEvent().invoke()) {
@@ -23,7 +23,7 @@ public class MixinScreen {
 
     @Inject(method={"renderBackground"}, at={@At(value="HEAD")}, cancellable=true)
     void renderBackground(DrawContext drawContext, CallbackInfo callbackInfo) {
-        if (Prestige.Companion.getSelfDestructed()) {
+        if (Rynox.Companion.getSelfDestructed()) {
             return;
         }
         if (new BackgroundEvent().invoke()) {

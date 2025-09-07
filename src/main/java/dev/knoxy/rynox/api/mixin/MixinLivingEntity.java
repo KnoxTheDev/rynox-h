@@ -1,6 +1,6 @@
 package dev.knoxy.rynox.api.mixin;
 
-import dev.knoxy.rynox.client.Prestige;
+import dev.knoxy.rynox.client.Rynox;
 import dev.knoxy.rynox.client.event.impl.JumpEvent;
 import net.minecraft.entity.Attackable;
 import net.minecraft.entity.Entity;
@@ -30,7 +30,7 @@ public abstract class MixinLivingEntity extends Entity implements Attackable {
         if (isSprinting()) {
             float f = this.getYaw();
             JumpEvent event = new JumpEvent(f);
-            if (!Prestige.Companion.getSelfDestructed() && event.invoke()) {
+            if (!Rynox.Companion.getSelfDestructed() && event.invoke()) {
                 f = event.getYaw();
             }
             float f2 = f * ((float)Math.PI / 180);

@@ -6,9 +6,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(value={PlayerInteractEntityC2SPacket.class})
 public interface IPlayerInteractEntityC2SPacket {
-    @Accessor(value="type")
-    public PlayerInteractEntityC2SPacket.InteractTypeHandler getType();
-
     @Accessor(value="entityId")
-    public int getEntityId();
+    int getEntityId();
 }

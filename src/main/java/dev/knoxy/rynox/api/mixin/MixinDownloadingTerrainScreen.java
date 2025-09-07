@@ -1,6 +1,6 @@
 package dev.knoxy.rynox.api.mixin;
 
-import dev.knoxy.rynox.client.Prestige;
+import dev.knoxy.rynox.client.Rynox;
 import dev.knoxy.rynox.client.event.impl.TerrainScreenEvent;
 import net.minecraft.client.gui.screen.DownloadingTerrainScreen;
 import net.minecraft.client.gui.screen.Screen;
@@ -18,7 +18,7 @@ public class MixinDownloadingTerrainScreen extends Screen {
 
     @Inject(at={@At(value="HEAD")}, method={"tick"})
     void tick(CallbackInfo callbackInfo) {
-        if (Prestige.Companion.getSelfDestructed()) {
+        if (Rynox.Companion.getSelfDestructed()) {
             return;
         }
         if (new TerrainScreenEvent().invoke()) {

@@ -1,6 +1,6 @@
 package dev.knoxy.rynox.client.util.impl;
 
-import dev.knoxy.rynox.client.Prestige;
+import dev.knoxy.rynox.client.Rynox;
 import dev.knoxy.rynox.client.util.MC;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
@@ -53,7 +53,7 @@ public class RotationUtil implements MC {
     }
 
     public boolean setPitch(Rotation rotation, float f, float f2, float f3) {
-        setRotation(new Rotation(getMc().player.getYaw(), MathUtil.interpolate(getMc().player.getPitch(), rotation.getPitch() + f2 / 2, Prestige.Companion.getRenderManager().getMs() * (1.1f - f) * 5 / f3 * RandomUtil.INSTANCE.randomInRange(0.5f, 1))));
+        setRotation(new Rotation(getMc().player.getYaw(), MathUtil.interpolate(getMc().player.getPitch(), rotation.getPitch() + f2 / 2, Rynox.Companion.getRenderManager().getMs() * (1.1f - f) * 5 / f3 * RandomUtil.INSTANCE.randomInRange(0.5f, 1))));
         return getMc().player.getPitch() - 5 < rotation.getPitch() && getMc().player.getPitch() + 5 > rotation.getPitch();
     }
 
@@ -93,15 +93,15 @@ public class RotationUtil implements MC {
     }
 
     public boolean setYaw(Rotation rotation, float f, float f2, float f3) {
-        float f4 = MathUtil.interpolate(getMc().player.getYaw(), rotation.getYaw() + f2 / 2, Prestige.Companion.getRenderManager().getMs() * (1.1f - f) * 5 / f3 * RandomUtil.INSTANCE.randomInRange(0.5f, 1));
-        float f5 = MathUtil.interpolate(getMc().player.getPitch(), rotation.getPitch() + f2 / 2, Prestige.Companion.getRenderManager().getMs() * (1.1f - f) * 5 / f3 * RandomUtil.INSTANCE.randomInRange(0.5f, 1));
+        float f4 = MathUtil.interpolate(getMc().player.getYaw(), rotation.getYaw() + f2 / 2, Rynox.Companion.getRenderManager().getMs() * (1.1f - f) * 5 / f3 * RandomUtil.INSTANCE.randomInRange(0.5f, 1));
+        float f5 = MathUtil.interpolate(getMc().player.getPitch(), rotation.getPitch() + f2 / 2, Rynox.Companion.getRenderManager().getMs() * (1.1f - f) * 5 / f3 * RandomUtil.INSTANCE.randomInRange(0.5f, 1));
         setRotation(new Rotation(f4, f5));
         return getMc().player.getYaw() - 5 < rotation.getYaw() && getMc().player.getYaw() + 5 > rotation.getYaw();
     }
 
     public boolean setRotation(Rotation rotation, float f, float f2, float f3) {
-        float f4 = MathUtil.interpolate(getMc().player.getYaw(), rotation.getYaw() + f2, Prestige.Companion.getRenderManager().getMs() * (1.1f - f) * 5 / f3 * RandomUtil.INSTANCE.randomInRange(0.5f, 1));
-        float f5 = MathUtil.interpolate(getMc().player.getPitch(), rotation.getPitch() + f2 / 2, Prestige.Companion.getRenderManager().getMs() * (1.1f - f) * 5 / f3 * RandomUtil.INSTANCE.randomInRange(0.5f, 1));
+        float f4 = MathUtil.interpolate(getMc().player.getYaw(), rotation.getYaw() + f2, Rynox.Companion.getRenderManager().getMs() * (1.1f - f) * 5 / f3 * RandomUtil.INSTANCE.randomInRange(0.5f, 1));
+        float f5 = MathUtil.interpolate(getMc().player.getPitch(), rotation.getPitch() + f2 / 2, Rynox.Companion.getRenderManager().getMs() * (1.1f - f) * 5 / f3 * RandomUtil.INSTANCE.randomInRange(0.5f, 1));
         setRotation(new Rotation(f4, f5));
         return getMc().player.getYaw() - 5 < rotation.getYaw() && getMc().player.getYaw() + 5 > rotation.getYaw() && getMc().player.getPitch() - 5 < rotation.getPitch() && getMc().player.getPitch() + 5 > rotation.getPitch();
     }

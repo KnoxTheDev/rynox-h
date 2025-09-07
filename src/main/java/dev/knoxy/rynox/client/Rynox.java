@@ -8,7 +8,6 @@ import dev.knoxy.rynox.client.handler.impl.KeybindHanlder;
 import dev.knoxy.rynox.client.managers.*;
 import dev.knoxy.rynox.client.shader.impl.GradientGlowShader;
 import dev.knoxy.rynox.client.ui.Interface;
-import dev.knoxy.rynox.client.ui.drawables.gui.screens.impl.ConfigScreen;
 import dev.knoxy.rynox.client.util.impl.RenderUtil;
 import net.fabricmc.api.ModInitializer;
 
@@ -21,7 +20,6 @@ public class Rynox implements ModInitializer {
     private static final EventBus eventBus = new EventBus();
     private static final FontManager fontManager = new FontManager();
     private static final ModuleManager moduleManager = new ModuleManager();
-    private static final ConfigManager configManager = new ConfigManager();
     private static final DamageManager damageManager = new DamageManager();
     private static final SocialsManager socialsManager = new SocialsManager();
     private static final RenderManager renderManager = new RenderManager();
@@ -29,7 +27,6 @@ public class Rynox implements ModInitializer {
     private static final ClickManager clickManager = new ClickManager();
     private static final ScreenshareBypass screenshareBypass = new ScreenshareBypass();
     private static final Interface clickGUI = new Interface();
-    private static ConfigScreen configScreen;
     private static final TargetManager targetManager = new TargetManager();
     private static final RotationManager rotationManager = new RotationManager();
     public static boolean selfDestructed;
@@ -56,10 +53,6 @@ public class Rynox implements ModInitializer {
             return moduleManager;
         }
 
-        public static ConfigManager getConfigManager() {
-            return configManager;
-        }
-
         public static DamageManager getDamageManager() {
             return damageManager;
         }
@@ -82,14 +75,6 @@ public class Rynox implements ModInitializer {
 
         public static Interface getClickGUI() {
             return clickGUI;
-        }
-
-        public static ConfigScreen getConfigScreen() {
-            return configScreen;
-        }
-
-        public static void setConfigScreen(ConfigScreen value) {
-            configScreen = value;
         }
 
         public static TargetManager getTargetManager() {

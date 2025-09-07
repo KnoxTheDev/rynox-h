@@ -1,6 +1,6 @@
 package dev.knoxy.rynox.api.mixin;
 
-import dev.knoxy.rynox.client.Prestige;
+import dev.knoxy.rynox.client.Rynox;
 import dev.knoxy.rynox.client.event.impl.PacketReceiveEvent;
 import dev.knoxy.rynox.client.event.impl.PacketSendEvent;
 import net.minecraft.network.ClientConnection;
@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class MixinClientConnection {
     @Inject(at={@At(value="HEAD")}, method={"handlePacket"}, cancellable=true)
     private static void handlePacket(Packet packet, PacketListener packetListener, CallbackInfo callbackInfo) {
-        if (Prestige.Companion.getSelfDestructed()) {
+        if (Rynox.Companion.getSelfDestructed()) {
             return;
         }
         PacketReceiveEvent event = new PacketReceiveEvent(packet);
@@ -26,7 +26,7 @@ public class MixinClientConnection {
 
     @Inject(at={@At(value="HEAD")}, method={"send(Lnet/minecraft/network/packet/Packet;)V"}, cancellable=true)
     void onPacketSend(Packet packet, CallbackInfo callbackInfo) {
-        if (Prestige.Companion.getSelfDestructed()) {
+        if (Rynox.Companion.getSelfDestructed()) {
             return;
         }
         PacketSendEvent event = new PacketSendEvent(packet);

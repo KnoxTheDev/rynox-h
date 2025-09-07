@@ -8,8 +8,9 @@ import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.PotionContentsComponent;
 import net.minecraft.item.Items;
-import net.minecraft.potion.PotionUtil;
 import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.screen.slot.SlotActionType;
 
@@ -57,9 +58,12 @@ public class InventoryUtil implements MC {
     }
 
     public boolean hasStatusEffect(ItemStack itemStack, StatusEffect statusEffect) {
-        for (StatusEffectInstance statusEffectInstance : PotionUtil.getPotionEffects(itemStack)) {
-            if (statusEffectInstance.getEffectType() == statusEffect) {
-                return true;
+        PotionContentsComponent potionContents = itemStack.get(DataComponentTypes.POTION_CONTENTS);
+        if (potionContents != null) {
+            for (StatusEffectInstance statusEffectInstance : potionContents.getEffects()) {
+                if (statusEffectInstance.getEffectType() == statusEffect) {
+                    return true;
+                }
             }
         }
         return false;

@@ -1,6 +1,6 @@
 package dev.knoxy.rynox.api.mixin;
 
-import dev.knoxy.rynox.client.Prestige;
+import dev.knoxy.rynox.client.Rynox;
 import dev.knoxy.rynox.client.event.impl.ResolutionChangeEvent;
 import dev.knoxy.rynox.client.event.impl.RunEvent;
 import dev.knoxy.rynox.client.event.impl.TickEvent;
@@ -27,7 +27,7 @@ public class MixinMinecraft {
 
     @Inject(method={"onResolutionChanged"}, at={@At(value="TAIL")})
     void captureResize(CallbackInfo callbackInfo) {
-        if (Prestige.Companion.getSelfDestructed()) {
+        if (Rynox.Companion.getSelfDestructed()) {
             return;
         }
         new ResolutionChangeEvent(this.window).invoke();
@@ -35,7 +35,7 @@ public class MixinMinecraft {
 
     @Inject(method={"tick"}, at={@At(value="HEAD")}, cancellable=true)
     void tick(CallbackInfo callbackInfo) {
-        if (Prestige.Companion.getSelfDestructed()) {
+        if (Rynox.Companion.getSelfDestructed()) {
             return;
         }
         if (MinecraftClient.getInstance().world == null || MinecraftClient.getInstance().player == null) {
@@ -48,7 +48,7 @@ public class MixinMinecraft {
 
     @Inject(method={"getFramerateLimit"}, at={@At(value="RETURN")}, cancellable=true)
     void getFramerateLimit(CallbackInfoReturnable callbackInfoReturnable) {
-        if (Prestige.Companion.getSelfDestructed()) {
+        if (Rynox.Companion.getSelfDestructed()) {
             return;
         }
         callbackInfoReturnable.setReturnValue(window.getFramerateLimit());
@@ -56,7 +56,7 @@ public class MixinMinecraft {
 
     @Inject(method={"tick"}, at={@At(value="HEAD")})
     void run(CallbackInfo callbackInfo) {
-        if (Prestige.Companion.getSelfDestructed()) {
+        if (Rynox.Companion.getSelfDestructed()) {
             return;
         }
         new RunEvent().invoke();

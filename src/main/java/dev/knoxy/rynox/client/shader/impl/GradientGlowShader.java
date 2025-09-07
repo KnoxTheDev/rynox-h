@@ -1,6 +1,6 @@
 package dev.knoxy.rynox.client.shader.impl;
 
-import dev.knoxy.rynox.client.Prestige;
+import dev.knoxy.rynox.client.Rynox;
 import dev.knoxy.rynox.client.event.EventListener;
 import dev.knoxy.rynox.client.event.impl.ResolutionChangeEvent;
 import dev.knoxy.rynox.client.shader.GlProgram;
@@ -28,7 +28,7 @@ public class GradientGlowShader extends GlProgram {
 
     public GradientGlowShader() {
         super(new Identifier("prestige", "gradientglow"), VertexFormats.POSITION);
-        Prestige.Companion.getEventBus().registerListener(this);
+        Rynox.Companion.getEventBus().registerListener(this);
     }
 
     public void setParameters(float f, float f2, float f3, float f4, float f5, float f6, Color color, Color color2, Color color3, Color color4) {

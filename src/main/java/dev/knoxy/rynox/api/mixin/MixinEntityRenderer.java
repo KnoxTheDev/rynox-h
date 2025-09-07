@@ -1,6 +1,6 @@
 package dev.knoxy.rynox.api.mixin;
 
-import dev.knoxy.rynox.client.Prestige;
+import dev.knoxy.rynox.client.Rynox;
 import dev.knoxy.rynox.client.event.impl.HealtEvent;
 import dev.knoxy.rynox.client.event.impl.LightEvent;
 import dev.knoxy.rynox.client.event.impl.NametagRenderEvent;
@@ -27,7 +27,7 @@ public abstract class MixinEntityRenderer {
             String name = entity.getDisplayName().getString();
             if (entity instanceof PlayerEntity playerEntity) {
                 if (entity.isAlive()) {
-                    if (Prestige.Companion.getSelfDestructed()) {
+                    if (Rynox.Companion.getSelfDestructed()) {
                         renderLabelIfPresent(entity, entity.getDisplayName(), matrixStack, vertexConsumerProvider, n3);
                     } else {
                         HealtEvent event = new HealtEvent(playerEntity, "");
@@ -50,7 +50,7 @@ public abstract class MixinEntityRenderer {
 
     @Inject(at={@At(value="HEAD")}, method={"renderLabelIfPresent"}, cancellable=true)
     void renderLabelIfPresent(Entity entity, Text text, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int n, CallbackInfo callbackInfo) {
-        if (Prestige.Companion.getSelfDestructed()) {
+        if (Rynox.Companion.getSelfDestructed()) {
             return;
         }
         if (new NametagRenderEvent(entity, text).invoke()) {
@@ -60,7 +60,7 @@ public abstract class MixinEntityRenderer {
 
     @Inject(method={"getSkyLight"}, at={@At(value="RETURN")}, cancellable=true)
     void onGetSkyLight(Entity entity, BlockPos blockPos, CallbackInfoReturnable callbackInfoReturnable) {
-        if (Prestige.Companion.getSelfDestructed()) {
+        if (Rynox.Companion.getSelfDestructed()) {
             return;
         }
         if (new LightEvent().invoke()) {

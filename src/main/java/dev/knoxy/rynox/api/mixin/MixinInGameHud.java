@@ -1,6 +1,6 @@
 package dev.knoxy.rynox.api.mixin;
 
-import dev.knoxy.rynox.client.Prestige;
+import dev.knoxy.rynox.client.Rynox;
 import dev.knoxy.rynox.client.event.impl.CrosshairEvent;
 import dev.knoxy.rynox.client.event.impl.Render2DEvent;
 import dev.knoxy.rynox.client.event.impl.StatusEffectOverlayEvent;
@@ -24,7 +24,7 @@ public class MixinInGameHud {
 
     @Inject(at={@At(value="HEAD")}, method={"renderStatusEffectOverlay"}, cancellable=true)
     void renderStatusEffectOverlay(DrawContext drawContext, CallbackInfo callbackInfo) {
-        if (Prestige.Companion.getSelfDestructed()) {
+        if (Rynox.Companion.getSelfDestructed()) {
             return;
         }
         if (new StatusEffectOverlayEvent().invoke()) {
@@ -34,7 +34,7 @@ public class MixinInGameHud {
 
     @Inject(method={"renderCrosshair"}, at={@At(value="HEAD")}, cancellable=true)
     void renderCrosshair(DrawContext drawContext, CallbackInfo callbackInfo) {
-        if (Prestige.Companion.getSelfDestructed()) {
+        if (Rynox.Companion.getSelfDestructed()) {
             return;
         }
         if (new CrosshairEvent().invoke()) {
@@ -44,7 +44,7 @@ public class MixinInGameHud {
 
     @Inject(at = { @At("HEAD") }, method = { "render" }, cancellable = true)
     void render(DrawContext drawContext, float n, CallbackInfo callbackInfo) {
-        if (!Prestige.Companion.getSelfDestructed()) {
+        if (!Rynox.Companion.getSelfDestructed()) {
             RenderHelper.setContext(drawContext);
             if (!new Render2DEvent(drawContext.getMatrices(), scaledWidth, scaledHeight).invoke()) {
                 if (!(MinecraftClient.getInstance().currentScreen instanceof Interface)) {

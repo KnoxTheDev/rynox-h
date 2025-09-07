@@ -3,7 +3,7 @@ package dev.knoxy.rynox.api.mixin;
 import dev.knoxy.rynox.client.shader.GlProgram;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
-import dev.knoxy.rynox.client.Prestige;
+import dev.knoxy.rynox.client.Rynox;
 import net.minecraft.client.gl.ShaderProgram;
 import org.spongepowered.asm.mixin.Mixin;
 
@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.Mixin;
 public class MixinShaderProgram {
     @ModifyArg(method = { "<init>" }, at = @At(value = "INVOKE", target = "Lnet/minecraft/util/Identifier;<init>(Ljava/lang/String;)V"), require = 0)
     String fixIdentifier(final String s) {
-        if (Prestige.Companion.getSelfDestructed()) {
+        if (Rynox.Companion.getSelfDestructed()) {
             return s;
         }
         if ((Object) this instanceof GlProgram.Shader) {

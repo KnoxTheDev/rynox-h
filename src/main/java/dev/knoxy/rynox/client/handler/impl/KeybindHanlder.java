@@ -5,7 +5,7 @@ import net.minecraft.client.MinecraftClient;
 import dev.knoxy.rynox.client.event.EventListener;
 import dev.knoxy.rynox.client.module.Module;
 import net.minecraft.client.gui.screen.Screen;
-import dev.knoxy.rynox.client.Prestige;
+import dev.knoxy.rynox.client.Rynox;
 import dev.knoxy.rynox.client.event.impl.KeyEvent;
 import dev.knoxy.rynox.client.handler.Handler;
 import dev.knoxy.rynox.client.util.MC;
@@ -17,21 +17,21 @@ public class KeybindHanlder implements MC, Handler {
 
     @Override
     public void register() {
-        Prestige.Companion.getEventBus().registerListener(this);
+        Rynox.Companion.getEventBus().registerListener(this);
     }
 
     @EventListener
     public void event(KeyEvent event) {
         if (this.getMc().currentScreen == null) {
-            if (event.getKey() == ((Number)Prestige.Companion.getModuleManager().getMenu().getBind().getObject()).intValue()) {
-                Prestige.Companion.getClickGUI().setInitPos(true);
+            if (event.getKey() == ((Number)Rynox.Companion.getModuleManager().getMenu().getBind().getObject()).intValue()) {
+                Rynox.Companion.getClickGUI().setInitPos(true);
                 scale = this.getMc().getWindow().getScaleFactor();
                 this.getMc().getWindow().setScaleFactor(2.0);
-                this.getMc().setScreen(Prestige.Companion.getClickGUI());
+                this.getMc().setScreen(Rynox.Companion.getClickGUI());
             }
         }
         if (this.getMc().currentScreen == null) {
-            for (Module module : Prestige.Companion.getModuleManager().getModules()) {
+            for (Module module : Rynox.Companion.getModuleManager().getModules()) {
                 if (module.getKeybind().isListening()) {
                     if (event.getAction() == 0) {
                         if (!module.isEnabled() || module.getKey() != event.getKey()) continue;
@@ -54,7 +54,7 @@ public class KeybindHanlder implements MC, Handler {
             boolean b = GLFW.glfwGetMouseButton(getMc().getWindow().getHandle(), 0) == 1;
             boolean b2 = GLFW.glfwGetMouseButton(getMc().getWindow().getHandle(), 1) == 1;
             boolean b3 = GLFW.glfwGetMouseButton(getMc().getWindow().getHandle(), 2) == 1;
-            for (Module module : Prestige.Companion.getModuleManager().getModules()) {
+            for (Module module : Rynox.Companion.getModuleManager().getModules()) {
                 toggle(module, b, b2, b3);
             }
         }

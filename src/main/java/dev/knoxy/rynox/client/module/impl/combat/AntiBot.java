@@ -1,6 +1,6 @@
 package dev.knoxy.rynox.client.module.impl.combat;
 
-import dev.knoxy.rynox.client.Prestige;
+import dev.knoxy.rynox.client.Rynox;
 import dev.knoxy.rynox.client.event.EventListener;
 import dev.knoxy.rynox.client.event.impl.BotEvent;
 import dev.knoxy.rynox.client.event.impl.PacketReceiveEvent;
@@ -33,8 +33,8 @@ public class AntiBot extends Module {
             if (entity == null) {
                 return;
             }
-            if (entity instanceof PlayerEntity && !Prestige.Companion.getAntiBotManager().getBots().contains(entity)) {
-                Prestige.Companion.getAntiBotManager().addBot((PlayerEntity)entity);
+            if (entity instanceof PlayerEntity && !Rynox.Companion.getAntiBotManager().getBots().contains(entity)) {
+                Rynox.Companion.getAntiBotManager().addBot((PlayerEntity)entity);
             }
         }
     }

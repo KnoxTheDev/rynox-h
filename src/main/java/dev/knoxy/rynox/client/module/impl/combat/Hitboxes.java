@@ -1,6 +1,6 @@
 package dev.knoxy.rynox.client.module.impl.combat;
 
-import dev.knoxy.rynox.client.Prestige;
+import dev.knoxy.rynox.client.Rynox;
 import dev.knoxy.rynox.client.event.EventListener;
 import dev.knoxy.rynox.client.event.impl.EntityMarginEvent;
 import dev.knoxy.rynox.client.event.impl.HitboxEvent;
@@ -35,7 +35,7 @@ public class Hitboxes extends Module {
         if (event.equals(getMc().player) || !(event.getEntity() instanceof EndCrystalEntity) && !(event.getEntity() instanceof PlayerEntity)) {
             return;
         }
-        if (event.getEntity() instanceof PlayerEntity && (!this.targets.getValue("Players") || !Prestige.Companion.getAntiBotManager().isNotBot(event.getEntity())) || event.getEntity() instanceof EndCrystalEntity && !this.targets.getValue("Crystals")) {
+        if (event.getEntity() instanceof PlayerEntity && (!this.targets.getValue("Players") || !Rynox.Companion.getAntiBotManager().isNotBot(event.getEntity())) || event.getEntity() instanceof EndCrystalEntity && !this.targets.getValue("Crystals")) {
             return;
         }
         event.setMargin(event.getMargin() + this.expand.getObject() / 10);
@@ -47,7 +47,7 @@ public class Hitboxes extends Module {
         if (entity == event.getEntity() && render.getObject() && entity != null && entity.distanceTo(getMc().player) > distance.getObject()) {
             return;
         }
-        if (event.getEntity() instanceof PlayerEntity && (!targets.getValue("Players") || !Prestige.Companion.getAntiBotManager().isNotBot(event.getEntity())) || event.getEntity() instanceof EndCrystalEntity && !targets.getValue("Crystals")) {
+        if (event.getEntity() instanceof PlayerEntity && (!targets.getValue("Players") || !Rynox.Companion.getAntiBotManager().isNotBot(event.getEntity())) || event.getEntity() instanceof EndCrystalEntity && !targets.getValue("Crystals")) {
             return;
         }
         event.setBox(event.getBox().expand(expand.getObject() / 10));

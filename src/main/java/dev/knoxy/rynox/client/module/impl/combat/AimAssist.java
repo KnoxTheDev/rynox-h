@@ -1,6 +1,6 @@
 package dev.knoxy.rynox.client.module.impl.combat;
 
-import dev.knoxy.rynox.client.Prestige;
+import dev.knoxy.rynox.client.Rynox;
 import dev.knoxy.rynox.client.event.EventListener;
 import dev.knoxy.rynox.client.event.impl.Render2DEvent;
 import dev.knoxy.rynox.client.module.Category;
@@ -19,7 +19,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.decoration.EndCrystalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.AxeItem;
-import net.minecraft.item.SwordItem;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.Vec3d;
@@ -70,7 +70,7 @@ public class AimAssist extends Module {
             }
         }
         if (weaponOnly.getObject()) {
-            if (!(getMc().player.getMainHandStack().getItem() instanceof SwordItem) && !(getMc().player.getMainHandStack().getItem() instanceof AxeItem)) {
+            if (!(getMc().player.getMainHandStack().isIn(ItemTags.SWORDS)) && !(getMc().player.getMainHandStack().getItem() instanceof AxeItem)) {
                 return;
             }
         }
@@ -120,7 +120,7 @@ public class AimAssist extends Module {
         Entity entity = null;
         double d = Double.MAX_VALUE;
         for (Entity entity2 : getMc().world.getEntities()) {
-            if (isEntityValid(entity2) && Prestige.Companion.getAntiBotManager().isNotBot(entity2) && (entity2 instanceof PlayerEntity player && !Prestige.Companion.getSocialsManager().isFriend(player.getEntityName()))) {
+            if (isEntityValid(entity2) && Rynox.Companion.getAntiBotManager().isNotBot(entity2) && (entity2 instanceof PlayerEntity player && !Rynox.Companion.getSocialsManager().isFriend(player.getEntityName()))) {
                 Vec3d vec3d = entity2.getEyePos();
                 double d2 = vec3d.y - getHeight(entity2.getHeight());
                 double d3 = getMc().player.squaredDistanceTo(vec3d.x, d2, vec3d.z);
@@ -137,7 +137,7 @@ public class AimAssist extends Module {
         if (!(entity instanceof EndCrystalEntity) && !(entity instanceof PlayerEntity)) {
             return false;
         }
-        if (entity == getMc().player || entity instanceof PlayerEntity && (!targets.getValue("Players") || !Prestige.Companion.getAntiBotManager().isNotBot(entity))) {
+        if (entity == getMc().player || entity instanceof PlayerEntity && (!targets.getValue("Players") || !Rynox.Companion.getAntiBotManager().isNotBot(entity))) {
             return false;
         }
         return !(entity instanceof EndCrystalEntity) || targets.getValue("Crystals");

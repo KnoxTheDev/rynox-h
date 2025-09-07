@@ -3,7 +3,7 @@ what fucking screenshare only checks your latest log - thnkscj
 */
 package dev.knoxy.rynox.client.bypass;
 
-import dev.knoxy.rynox.client.Prestige;
+import dev.knoxy.rynox.client.Rynox;
 import dev.knoxy.rynox.client.event.EventListener;
 import dev.knoxy.rynox.client.event.impl.RunEvent;
 import dev.knoxy.rynox.client.util.impl.TimerUtil;
@@ -17,7 +17,7 @@ public class ScreenshareBypass {
     public TimerUtil timer = new TimerUtil();
 
     public ScreenshareBypass() {
-        Prestige.Companion.getEventBus().registerListener(this);
+        Rynox.Companion.getEventBus().registerListener(this);
     }
 
     public void setList(List list) {

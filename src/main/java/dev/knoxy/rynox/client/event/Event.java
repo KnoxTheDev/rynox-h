@@ -1,6 +1,6 @@
 package dev.knoxy.rynox.client.event;
 
-import dev.knoxy.rynox.client.Prestige;
+import dev.knoxy.rynox.client.Rynox;
 
 public class Event {
     public Phase phase;
@@ -15,7 +15,7 @@ public class Event {
     }
 
     public boolean invoke() {
-        return Prestige.Companion.getEventBus().invoke(this);
+        return Rynox.Companion.getEventBus().invoke(this);
     }
 
     public Phase getPhase() {

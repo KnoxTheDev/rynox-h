@@ -1,6 +1,6 @@
 package dev.knoxy.rynox.api.mixin;
 
-import dev.knoxy.rynox.client.Prestige;
+import dev.knoxy.rynox.client.Rynox;
 import dev.knoxy.rynox.client.event.impl.FrustrumEvent;
 import dev.knoxy.rynox.client.event.impl.LightEvent;
 import net.minecraft.client.render.Frustum;
@@ -21,9 +21,9 @@ public class MixinWorldRenderer {
     @Shadow
     public Frustum frustum;
 
-    @ModifyVariable(method={"getLightmapCoordinates(Lnet/minecraft/world/BlockRenderView;Lnet/minecraft/block/BlockState;Lnet/minecraft/util/math/BlockPos;)I"}, at=@At(value="STORE"), ordinal=0)
+    @ModifyVariable(method = "getLightmapCoordinates(Lnet/minecraft/client/render/WorldRenderer$BrightnessGetter;Lnet/minecraft/world/BlockRenderView;Lnet/minecraft/block/BlockState;Lnet/minecraft/util/math/BlockPos;)I", at = @At("STORE"), ordinal = 0)
     private static int getLightmapCoordinatesModifySkyLight(int n) {
-        if (Prestige.Companion.getSelfDestructed()) {
+        if (Rynox.Companion.getSelfDestructed()) {
             return n;
         }
         LightEvent lightEvent = new LightEvent();
@@ -35,7 +35,7 @@ public class MixinWorldRenderer {
 
     @Inject(at={@At(value="RETURN")}, method={"setupFrustum"})
     void onUpdateFrustum(MatrixStack matrixStack, Vec3d vec3d, Matrix4f matrix4f, CallbackInfo callbackInfo) {
-        if (Prestige.Companion.getSelfDestructed()) {
+        if (Rynox.Companion.getSelfDestructed()) {
             return;
         }
         new FrustrumEvent(frustum).invoke();

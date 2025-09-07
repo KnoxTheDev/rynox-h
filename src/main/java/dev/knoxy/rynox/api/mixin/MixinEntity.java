@@ -1,6 +1,6 @@
 package dev.knoxy.rynox.api.mixin;
 
-import dev.knoxy.rynox.client.Prestige;
+import dev.knoxy.rynox.client.Rynox;
 import dev.knoxy.rynox.client.event.impl.EntityMarginEvent;
 import dev.knoxy.rynox.client.event.impl.HitboxEvent;
 import dev.knoxy.rynox.client.event.impl.JumpEvent;
@@ -22,7 +22,7 @@ public abstract class MixinEntity {
 
     @Inject(method={"getTargetingMargin"}, at={@At(value="HEAD")}, cancellable=true)
     void onGetTargetingMargin(CallbackInfoReturnable callbackInfoReturnable) {
-        if (Prestige.Companion.getSelfDestructed()) {
+        if (Rynox.Companion.getSelfDestructed()) {
             return;
         }
         if (getEntityWorld() == null) {
@@ -40,7 +40,7 @@ public abstract class MixinEntity {
 
     @Inject(method={"getBoundingBox"}, at={@At(value="RETURN")}, cancellable=true)
     void getBoundingBox(CallbackInfoReturnable callbackInfoReturnable) {
-        if (Prestige.Companion.getSelfDestructed()) {
+        if (Rynox.Companion.getSelfDestructed()) {
             return;
         }
         if (getEntityWorld() == null) {
@@ -62,7 +62,7 @@ public abstract class MixinEntity {
 
     @ModifyArgs(at=@At(value="INVOKE", target="Lnet/minecraft/entity/Entity;movementInputToVelocity(Lnet/minecraft/util/math/Vec3d;FF)Lnet/minecraft/util/math/Vec3d;"), method={"updateVelocity"})
     void movementInputToVelocity(Args args) {
-        if (Prestige.Companion.getSelfDestructed()) {
+        if (Rynox.Companion.getSelfDestructed()) {
             return;
         }
         JumpEvent event = new JumpEvent(((Float)args.get(2)).floatValue());

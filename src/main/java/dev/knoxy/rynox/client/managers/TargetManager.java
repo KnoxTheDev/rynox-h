@@ -21,10 +21,9 @@ public class TargetManager implements MC {
 
     @EventListener
     public void event(PacketSendEvent event) {
-        if (event.getPacket() instanceof PlayerInteractEntityC2SPacket) {
-            PlayerInteractEntityC2SPacket.InteractType interactType = ((IPlayerInteractEntityC2SPacket)event.getPacket()).getType().getType();
-            if (interactType == PlayerInteractEntityC2SPacket.InteractType.ATTACK) {
-                Entity entity = this.getMc().world.getEntityById(((IPlayerInteractEntityC2SPacket)event.getPacket()).getEntityId());
+        if (event.getPacket() instanceof PlayerInteractEntityC2SPacket packet) {
+            if (packet.getType() == PlayerInteractEntityC2SPacket.InteractionType.ATTACK) {
+                Entity entity = this.getMc().world.getEntityById(packet.getEntityId());
                 if (entity == null) {
                     return;
                 }

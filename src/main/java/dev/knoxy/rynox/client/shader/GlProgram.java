@@ -2,9 +2,9 @@ package dev.knoxy.rynox.client.shader;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import dev.knoxy.rynox.api.mixin.IShaderProgram;
+import com.mojang.blaze3d.vertex.VertexFormat;
 import net.minecraft.client.gl.GlUniform;
 import net.minecraft.client.gl.ShaderProgram;
-import net.minecraft.client.render.VertexFormat;
 import net.minecraft.resource.ResourceFactory;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
@@ -21,7 +21,7 @@ public class GlProgram {
 
     public ShaderProgram backingProgram;
 
-    public GlProgram(Identifier id, VertexFormat vertexFormat) {
+    public GlProgram(Identifier id, com.mojang.blaze3d.vertex.VertexFormat vertexFormat) {
         REGISTERED_PROGRAMS.add(new Pair<>(resourceFactory -> {
             try {
                 return new Shader(resourceFactory, id.toString(), vertexFormat);
@@ -49,7 +49,7 @@ public class GlProgram {
     }
 
     public static class Shader extends ShaderProgram {
-        private Shader(ResourceFactory factory, String name, VertexFormat format) throws IOException {
+        private Shader(ResourceFactory factory, String name, com.mojang.blaze3d.vertex.VertexFormat format) throws IOException {
             super(factory, name, format);
         }
     }

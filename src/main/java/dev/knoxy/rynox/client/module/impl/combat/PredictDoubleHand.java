@@ -1,6 +1,6 @@
 package dev.knoxy.rynox.client.module.impl.combat;
 
-import dev.knoxy.rynox.client.Prestige;
+import dev.knoxy.rynox.client.Rynox;
 import dev.knoxy.rynox.client.event.EventListener;
 import dev.knoxy.rynox.client.event.impl.PacketSendEvent;
 import dev.knoxy.rynox.client.event.impl.Render2DEvent;
@@ -24,8 +24,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
-import net.minecraft.item.SwordItem;
 import net.minecraft.network.packet.c2s.play.PlayerInteractItemC2SPacket;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 
@@ -77,7 +77,7 @@ public class PredictDoubleHand extends Module {
             if (triggers.getValue("Anchors")) {
                 ArrayList<BlockPos> arrayList = BlockUtil.INSTANCE.method1010(5, arg_0 -> Math.sqrt(playerEntity.squaredDistanceTo(((BlockPos)arg_0).toCenterPos())) < 5.0 && getMc().world.getBlockState((BlockPos)arg_0).getBlock() == Blocks.RESPAWN_ANCHOR && getMc().world.getBlockState((BlockPos)arg_0).get(Properties.CHARGES) == 0);
                 for (BlockPos blockPos : arrayList) {
-                    double d = Prestige.Companion.getDamageManager().anchorDamage(getMc().player, blockPos.toCenterPos()) / 2 * sensitivity.getObject();
+                    double d = Rynox.Companion.getDamageManager().anchorDamage(getMc().player, blockPos.toCenterPos()) / 2 * sensitivity.getObject();
                     if (playerEntity2.getHealth() + getMc().player.getAbsorptionAmount() - d < 0) {
                         InventoryUtil.INSTANCE.setCurrentSlot(n);
                         return;
@@ -87,7 +87,7 @@ public class PredictDoubleHand extends Module {
             if (triggers.getValue("Crystals")) {
                 for (Entity object : this.getMc().world.getEntities()) {
                     if (object instanceof EndCrystalEntity) {
-                        double d = Prestige.Companion.getDamageManager().crystalDamage(getMc().player, object.getBlockPos().toCenterPos()) / 2.0f * sensitivity.getObject();
+                        double d = Rynox.Companion.getDamageManager().crystalDamage(getMc().player, object.getBlockPos().toCenterPos()) / 2.0f * sensitivity.getObject();
                         if (playerEntity2.getHealth() + getMc().player.getAbsorptionAmount() - d < 0) {
                             InventoryUtil.INSTANCE.setCurrentSlot(n);
                             return;
@@ -98,7 +98,7 @@ public class PredictDoubleHand extends Module {
             if (triggers.getValue("Obsidian")) {
                 ArrayList<BlockPos> arrayList = BlockUtil.INSTANCE.method1010(5, arg_0 -> ((BlockPos)arg_0).getY() < getMc().player.getY() && Math.sqrt(playerEntity.squaredDistanceTo(((BlockPos)arg_0).toCenterPos())) < 5.0 && getMc().world.getBlockState((BlockPos)arg_0).getBlock() == Blocks.OBSIDIAN && getMc().world.getBlockState(((BlockPos)arg_0).up()).getBlock() == Blocks.AIR);
                 for (BlockPos blockPos : arrayList) {
-                    DamageManager damageManager = Prestige.Companion.getDamageManager();
+                    DamageManager damageManager = Rynox.Companion.getDamageManager();
                     double d = damageManager.crystalDamage(getMc().player, blockPos.up().toCenterPos()) / 2 * sensitivity.getObject();
                     if (playerEntity2.getHealth() + getMc().player.getAbsorptionAmount() - d < 0) {
                         InventoryUtil.INSTANCE.setCurrentSlot(n);
@@ -106,7 +106,7 @@ public class PredictDoubleHand extends Module {
                     }
                 }
             }
-            if (triggers.getValue("Sword Pop") && (playerEntity2.getMainHandStack().getItem() instanceof SwordItem || playerEntity2.getMainHandStack().getItem() instanceof AxeItem) && playerEntity2.getHealth() + this.getMc().player.getAbsorptionAmount() < 1.0f) {
+            if (triggers.getValue("Sword Pop") && (playerEntity2.getMainHandStack().isIn(ItemTags.SWORDS) || playerEntity2.getMainHandStack().getItem() instanceof AxeItem) && playerEntity2.getHealth() + this.getMc().player.getAbsorptionAmount() < 1.0f) {
                 InventoryUtil.INSTANCE.setCurrentSlot(n);
             }
         }

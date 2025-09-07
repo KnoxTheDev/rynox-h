@@ -1,7 +1,7 @@
 package dev.knoxy.rynox.client.ui.font;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import dev.knoxy.rynox.client.Prestige;
+import dev.knoxy.rynox.client.Rynox;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.*;
 import net.minecraft.client.texture.NativeImage;
@@ -150,7 +150,7 @@ public class FontRenderer {
 
     private void drawString(String text, float x, float y, Color color, boolean idk) {
         int n = Math.min(187, color.getAlpha());
-        MatrixStack matrixStack = Prestige.Companion.getFontManager().getMatrixStack();
+        MatrixStack matrixStack = Rynox.Companion.getFontManager().getMatrixStack();
         this.drawString(matrixStack, text, x, y, color, new Color(0, 0, 0, n == -1 ? color.getAlpha() : n), idk);
     }
 

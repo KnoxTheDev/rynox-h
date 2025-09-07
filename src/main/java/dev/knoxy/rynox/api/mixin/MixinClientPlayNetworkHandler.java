@@ -1,6 +1,6 @@
 package dev.knoxy.rynox.api.mixin;
 
-import dev.knoxy.rynox.client.Prestige;
+import dev.knoxy.rynox.client.Rynox;
 import dev.knoxy.rynox.client.event.impl.OnJoinEvent;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.client.world.ClientWorld;
@@ -26,7 +26,7 @@ public class MixinClientPlayNetworkHandler {
 
     @Inject(method={"onGameJoin"}, at={@At(value="TAIL")})
     void onGameJoinTail(GameJoinS2CPacket gameJoinS2CPacket, CallbackInfo callbackInfo) {
-        if (Prestige.Companion.getSelfDestructed()) {
+        if (Rynox.Companion.getSelfDestructed()) {
             return;
         }
         if (!this.worldNotNull) {
